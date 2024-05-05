@@ -7,6 +7,9 @@
 
     if (pomFilePath == null || !(new File(pomFilePath)).isFile()) {
         error "Invalid POM file!"
+        echo "MAVEN_HOME: ${mavenHome}"
+echo "Does POM file exist? ${new File(pomFilePath).exists()}"
+
     }
 
     echo "Building project using Maven..."
