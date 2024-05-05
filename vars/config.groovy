@@ -9,7 +9,8 @@ def getConfig() {
         REMOTE_DIRECTORY: 'C:\\test',
         REMOTE_FILENAME: 'kumari.war',
       WAR_FILE: 'C:\\Program Files\\Jenkins\\Jenkins home\\workspace\\KUMARI\\kumari-backend\\kb-web\\target\\kb-web-0.0.1-SNAPSHOT.war', // Specify the path to your WAR file dynamically
-                       
+              POM_FILE: 'C:\\Program Files\\Jenkins\\Jenkins home\\workspace\\test\\kumari-backend\\pom.xml',
+                                 
         VERBOSE: 'true'
 
     ]
