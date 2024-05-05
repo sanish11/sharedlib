@@ -2,7 +2,7 @@ def call(Map config) {
     def pomFile = config.POM_FILE
     def mavenHome = config.MAVEN_HOME
 
-    if (pomFile.empty) {
+    if (pomFile==null) {
         error "POM file not found!"
     }
 
