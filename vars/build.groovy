@@ -12,7 +12,7 @@
     echo "Building project using Maven..."
 
     // Execute Maven clean and package from the current working directory
-    sh "${mavenHome}/bin/mvn -f ${pomFilePath} clean package"
+    bat "${mavenHome}/bin/mvn -f ${pomFilePath} clean package"
 }
 
 
