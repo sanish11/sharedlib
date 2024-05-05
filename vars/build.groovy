@@ -2,9 +2,9 @@ def call(Map config) {
     def pomFile = config.POM_FILE
     def mavenHome = config.MAVEN_HOME
 
-    if (pomFile==null) {
-        error "POM file not found!"
-    }
+if (pomFile == null || !pomFile.isFile()) {
+    error "Invalid POM file!"
+}
 
     echo "Building project using Maven..."
     
