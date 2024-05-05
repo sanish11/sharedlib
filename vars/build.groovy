@@ -9,7 +9,7 @@ def call(Map config) {
     echo "Building project using Maven..."
     
     // Change to the directory containing the POM file and run Maven clean and package
-    dir(pomFile.parent) {
+    dir(dirname(pomFile)) {
         sh "${mavenHome}/bin/mvn clean package"
     }
 }
