@@ -2,6 +2,7 @@
 def call(Map config) {
     def pomFilePath = config.POM_FILE
     def mavenHome = config.MAVEN_HOME
+    echo ":::: pomFilePath ::: ${pomFilePath}"
 
    
 
@@ -9,6 +10,6 @@ def call(Map config) {
 
     // Execute Maven clean and package from the current working directory
     dir(pomFilePath){
-        bat "\"${mavenHome}/bin/mvn\" -f \"${pomFilePath}\" clean package"
+        bat "\"${mavenHome}/bin/mvn\" clean package"
     }
 }
