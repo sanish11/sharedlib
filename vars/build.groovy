@@ -10,6 +10,6 @@ def call(Map config) {
 
     // Execute Maven clean and package from the current working directory
     dir(pomFilePath){
-        sh "\"${mavenHome}/bin/mvn\" clean package"
+        sh "\"${mavenHome}/bin/mvn\" clean install"
     }
 }
