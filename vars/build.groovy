@@ -3,7 +3,7 @@ User
 def call(Map config) {
     def pomFilePath = config.POM_FILE
     def mavenHome = config.MAVEN_HOME
-    def javaHome = config.JAVA_HOME
+   // def javaHome = config.JAVA_HOME
     echo ":::: pomFilePath ::: ${pomFilePath}"
      def javaHomePath = tool name: 'jdk8', type: 'jdk'
     env.JAVA_HOME = javaHomePath
