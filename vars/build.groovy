@@ -1,14 +1,8 @@
-User
 // Change to the directory containing the POM file and run Maven clean and package
 def call(Map config) {
     def pomFilePath = config.POM_FILE
     def mavenHome = config.MAVEN_HOME
-   // def javaHome = config.JAVA_HOME
     echo ":::: pomFilePath ::: ${pomFilePath}"
-     def javaHomePath = tool name: 'jdk8', type: 'jdk'
-    env.JAVA_HOME = javaHomePath
-
-   
 
     echo "Building project using Maven..."
 
@@ -17,9 +11,13 @@ def call(Map config) {
         // Specify the Java tool to be used
         tool name: 'jdk8', type: 'jdk'
 
+        // Set JAVA_HOME environment variable
+        def javaHomePath = tool name: 'jdk8', type: 'jdk'
+        env.JAVA_HOME = javaHomePath
+
         // Execute Maven clean and package using the specified Java version
         sh """
-            export JAVA_HOME=${javaHome}
+            export JAVA_HOME=${env.JAVA_HOME}
             ${mavenHome}/bin/mvn clean install -X
         """
     }
