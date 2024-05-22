@@ -12,7 +12,7 @@ def call(Map config) {
     echo "Deploying dist directory: ${distDirectory}"
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
-        rsync -avz -e "ssh -p ${sshPort}" "${distDirectory}/*" "${sshUsername}@${sshHostname}:${remoteDirectory}/"
-
+        sh "scp -P ${sshPort} -r ${distDirectory}/* ${sshUsername}@${sshHostname}:${remoteDirectory}/"
+   
     }
 }
