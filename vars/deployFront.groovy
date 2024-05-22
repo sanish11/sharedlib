@@ -14,7 +14,7 @@ def call(Map config) {
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
         sh """
-            rsync -avz -e "ssh -p ${sshPort}" "${distDirectory}/" "${sshUsername}@${sshHostname}:${remoteDirectory}/"
+            sh "scp -P ${sshPort} -r ${distDirectory}/* ${sshUsername}@${sshHostname}:${remoteDirectory}/"
         """
     }
 }
