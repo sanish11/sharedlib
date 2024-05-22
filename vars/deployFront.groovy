@@ -1,4 +1,3 @@
-
 def call(Map config) {
     def distDirectory = config.DIST_DIRECTORY
     def sshUsername = config.SSH_USERNAME
@@ -13,8 +12,6 @@ def call(Map config) {
     echo "Deploying dist directory: ${distDirectory}"
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
-        sh """
-            sh "scp -P ${sshPort} -r ${distDirectory}/* ${sshUsername}@${sshHostname}:${remoteDirectory}/"
-        """
+        sh "scp -P ${sshPort} -r ${distDirectory}/* ${sshUsername}@${sshHostname}:${remoteDirectory}/"
     }
 }
