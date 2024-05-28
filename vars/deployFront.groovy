@@ -19,7 +19,9 @@ def call(Map config) {
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
         // Remove all files in the remote directory before copying the new zip
         sh """
-            ssh -p ${sshPort} ${sshUsername}@${sshHostname} "rm -rf ${remoteDirectory}/*"
+            ssh -p ${sshPort} ${sshUsername}@${sshHostname} \"
+                powershell -Command "Remove-Item -Path '${remoteDirectory}\\*' -Recurse -Force"
+            \"
         """
         
         // SCP the dist.zip to the remote server
@@ -28,7 +30,7 @@ def call(Map config) {
         // Unzip the new dist.zip on the remote server
         sh """
             ssh -p ${sshPort} ${sshUsername}@${sshHostname} \"
-                powershell -Command Expand-Archive -Path '${remoteDirectory}\\dist.zip' -DestinationPath '${remoteDirectory}'
+                powershell -Command "Expand-Archive -Path '${remoteDirectory}\\dist.zip' -DestinationPath '${remoteDirectory}' -Force"
             \"
         """
     }
