@@ -1,5 +1,5 @@
 def call() {
-    def nodejs = tool name: 'node16', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+    def nodejs = tool name: 'NodeJS 18.13.0', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
     withEnv(["PATH+NODEJS=${nodejs}/bin"]) {
         dir('customer-form-front') {
             sh '''
