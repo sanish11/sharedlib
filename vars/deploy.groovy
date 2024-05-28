@@ -6,17 +6,13 @@ def deployWar(Map config) {
     def remoteDirectory = config.REMOTE_DIRECTORY
     def remoteFilename = config.REMOTE_FILENAME
 
-    if (!warFile) {
+    if (warFile.empty) {
         error "WAR file not found!"
     }
 
     echo "Deploying WAR file: ${warFile}"
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
-        sh """
-            scp -v -P ${sshPort} "${warFile}" "${sshUsername}@${sshHostname}:${remoteDirectory}/${remoteFilename}"
-        """
+        sh "scp -P ${sshPort} \"${warFile}\" \"${sshUsername}@${sshHostname}:${remoteDirectory}/${remoteFilename}\""
     }
 }
-
-
