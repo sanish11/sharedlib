@@ -11,7 +11,7 @@ def call(Map config) {
 
     echo "Deploying dist directory: ${distDirectory}"
 
-    // Navigate to the browser directory and zip its contents
+    // Zip the contents of the browser directory
     dir(distDirectory) {
         sh "zip -r dist.zip ."
     }
@@ -20,12 +20,7 @@ def call(Map config) {
         // Remove all files in the remote directory before copying the new zip
         sh """
             ssh -p ${sshPort} ${sshUsername}@${sshHostname} powershell -Command \"
-                if (Test-Path '${remoteDirectory}') {
-                    Remove-Item -Path '${remoteDirectory}\\*' -Recurse -Force -ErrorAction Stop
-                    Write-Output 'Successfully removed contents of ${remoteDirectory}'
-                } else {
-                    Write-Output 'Path ${remoteDirectory} does not exist'
-                }
+                Remove-Item -Path '${remoteDirectory}\\*' -Recurse -Force -ErrorAction Stop
             \"
         """
         
