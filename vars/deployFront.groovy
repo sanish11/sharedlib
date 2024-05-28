@@ -10,28 +10,11 @@ def call(Map config) {
     }
 
     echo "Deploying dist directory: ${distDirectory}"
-
-    // Zip the contents of the browser directory
-    dir(distDirectory) {
-        sh "zip -r dist.zip ."
-    }
+    
+    sh "zip -r dist.zip ${distDirectory}"
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
-        // Remove all files in the remote directory before copying the new zip
-        sh """
-            ssh -p ${sshPort} ${sshUsername}@${sshHostname} powershell -Command \"
-                Remove-Item -Path '${remoteDirectory}\\*' -Recurse -Force -ErrorAction Stop
-            \"
-        """
-        
-        // SCP the dist.zip to the remote server
-        sh "scp -P ${sshPort} ${distDirectory}/dist.zip ${sshUsername}@${sshHostname}:${remoteDirectory}"
-        
-        // Unzip the new dist.zip on the remote server
-        sh """
-            ssh -p ${sshPort} ${sshUsername}@${sshHostname} powershell -Command \"
-                Expand-Archive -Path '${remoteDirectory}\\dist.zip' -DestinationPath '${remoteDirectory}' -Force
-            \"
-        """
+         sh "scp -r -P 22 dist.zip Administrator@103.94.159.179:C:/test"
+         sh "ssh -p 22 Administrator@103.94.159.179 \"powershell -Command Expand-Archive -Path 'C:\\\\test\\\\dist.zip' -DestinationPath 'C:\\\\test\\\\'\""
     }
 }
