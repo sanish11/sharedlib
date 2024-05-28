@@ -15,6 +15,6 @@ def call(Map config) {
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
         sh "scp -P ${sshPort} dist.zip ${sshUsername}@${sshHostname}:${remoteDirectory}"
-        sh "ssh -p ${sshPort} ${sshUsername}@${sshHostname} 'unzip -o ${remoteDirectory}/dist.zip -d ${remoteDirectory}/'"
+        sh "ssh -p ${sshPort} ${sshUsername}@${sshHostname} 'Expand-Archive -Path ${remoteDirectory}/dist.zip -DestinationPath ${remoteDirectory}/'"
     }
 }
