@@ -10,6 +10,7 @@ def call(Map config) {
     }
 
     echo "Deploying dist directory: ${distDirectory}"
+    echo "${distDirectory}"
     
     sh "zip -r dist.zip ${distDirectory}"
 
