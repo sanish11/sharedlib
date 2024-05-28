@@ -6,7 +6,7 @@ def deployWar(Map config) {
     def remoteDirectory = config.REMOTE_DIRECTORY
     def remoteFilename = config.REMOTE_FILENAME
 
-    if (warFile.empty) {
+    if (!warFile) {
         error "WAR file not found!"
     }
 
@@ -14,7 +14,8 @@ def deployWar(Map config) {
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
         sh """
-                            rsync -avz -e 'ssh -i ${env.SSH_KEY} -p ${env.SSH_PORT}' "${env.WAR_FILE}" "${env.SSH_USERNAME}@${env.SSH_HOSTNAME}:${env.REMOTE_DIRECTORY}/${env.REMOTE_FILENAME}"
-                        """
+            rsync -avz -e 'ssh -i $SSH_KEY -p $sshPort' "$warFile" "$sshUsername@$sshHostname:$remoteDirectory/$remoteFilename"
+        """
     }
 }
+
