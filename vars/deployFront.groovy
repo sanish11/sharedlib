@@ -11,7 +11,7 @@ def call(Map config) {
 
     echo "Deploying dist directory: ${distDirectory}"
 
-    sh "cd ${distDirectory} && zip -jr dist.zip . -i browser/*"
+    sh "zip -r dist.zip ${distDirectory}"
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
         sh "scp -r -P ${sshPort} dist.zip ${sshUsername}@${sshHostname}:${remoteDirectory}"
