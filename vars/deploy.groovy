@@ -14,7 +14,7 @@ def deployWar(Map config) {
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
         sh """
-            scp -i ${SSH_KEY} -P ${sshPort} "${warFile}" "${sshUsername}@${sshHostname}:${remoteDirectory}/${remoteFilename}"
+            scp -v -P ${sshPort} "${warFile}" "${sshUsername}@${sshHostname}:${remoteDirectory}/${remoteFilename}"
         """
     }
 }
