@@ -19,15 +19,13 @@ def call(Map config) {
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
         // Remove all files in the remote directory before copying the new zip
         sh """
-            ssh -p ${sshPort} ${sshUsername}@${sshHostname} \"
-                powershell -Command \"
-                    if (Test-Path '${remoteDirectory}') {
-                        Remove-Item -Path '${remoteDirectory}\\*' -Recurse -Force -ErrorAction Stop
-                        Write-Output 'Successfully removed contents of ${remoteDirectory}'
-                    } else {
-                        Write-Output 'Path ${remoteDirectory} does not exist'
-                    }
-                \"
+            ssh -p ${sshPort} ${sshUsername}@${sshHostname} powershell -Command \"
+                if (Test-Path '${remoteDirectory}') {
+                    Remove-Item -Path '${remoteDirectory}\\*' -Recurse -Force -ErrorAction Stop
+                    Write-Output 'Successfully removed contents of ${remoteDirectory}'
+                } else {
+                    Write-Output 'Path ${remoteDirectory} does not exist'
+                }
             \"
         """
         
@@ -36,10 +34,8 @@ def call(Map config) {
         
         // Unzip the new dist.zip on the remote server
         sh """
-            ssh -p ${sshPort} ${sshUsername}@${sshHostname} \"
-                powershell -Command \"
-                    Expand-Archive -Path '${remoteDirectory}\\dist.zip' -DestinationPath '${remoteDirectory}' -Force
-                \"
+            ssh -p ${sshPort} ${sshUsername}@${sshHostname} powershell -Command \"
+                Expand-Archive -Path '${remoteDirectory}\\dist.zip' -DestinationPath '${remoteDirectory}' -Force
             \"
         """
     }
