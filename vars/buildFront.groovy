@@ -7,7 +7,7 @@ def call() {
                 echo "Installing npm packages"
                 npm install
                 echo "Running npm build"
-                npm run build
+                ng build
             '''
         }
     }
