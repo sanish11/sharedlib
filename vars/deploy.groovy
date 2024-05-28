@@ -13,6 +13,6 @@ def deployWar(Map config) {
     echo "Deploying WAR file: ${warFile}"
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
-        sh "scp -P ${sshPort} \"${warFile}\" \"${sshUsername}@${sshHostname}:${remoteDirectory}/${remoteFilename}\""
+        sh "scp -v -P ${sshPort} \"${warFile}\" \"${sshUsername}@${sshHostname}:${remoteDirectory}/${remoteFilename}\""
     }
 }
