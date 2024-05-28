@@ -15,7 +15,7 @@ def call(Map config) {
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
         sh "scp -P ${sshPort} dist.zip ${sshUsername}@${sshHostname}:${remoteDirectory}"
-        ssh -p 22 Administrator@103.94.159.179 "powershell -Command Expand-Archive -Path 'C:\\test\\dist.zip' -DestinationPath 'C:\\test\\'"
+     sh "ssh -p 22 Administrator@103.94.159.179 \"powershell -Command Expand-Archive -Path 'C:\\\\test\\\\dist.zip' -DestinationPath 'C:\\\\test\\\\'\""
 
     }
 }
