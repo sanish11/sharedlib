@@ -14,7 +14,7 @@ def deployWar(Map config) {
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
         sh """
-            rsync -avz -e 'ssh  -p $sshPort' "$warFile" "$sshUsername@$sshHostname:$remoteDirectory/$remoteFilename"
+            scp -i ${SSH_KEY} -P ${sshPort} "${warFile}" "${sshUsername}@${sshHostname}:${remoteDirectory}/${remoteFilename}"
         """
     }
 }
