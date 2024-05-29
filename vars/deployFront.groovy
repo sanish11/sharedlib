@@ -14,7 +14,7 @@ def call(Map config) {
 
 sh """
         cd ${distDirectory}
-        zip -r dist.zip ./*
+        zip -r dist.zip ./browser/*
     """
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
