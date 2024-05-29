@@ -1,5 +1,5 @@
 def call(Map config) {
-    def distDirectory = "customer-form-front/dist/my-app/${config.DIST_DIRECTORY}"
+    def distDirectory = config.DIST_DIRECTORY
 
     def sshUsername = config.SSH_USERNAME
     def sshHostname = config.SSH_HOSTNAME
