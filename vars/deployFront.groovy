@@ -1,5 +1,6 @@
 def call(Map config) {
-    def distDirectory = "customer-form-front/dist/my-app${env.DIST_DIRECTORY}"
+    def distDirectory = "customer-form-front/dist/my-app/${env.DIST_DIRECTORY}"
+
     def sshUsername = config.SSH_USERNAME
     def sshHostname = config.SSH_HOSTNAME
     def sshPort = config.SSH_PORT
@@ -12,7 +13,7 @@ def call(Map config) {
     echo "Deploying dist directory: ${distDirectory}"
 
 sh """
-        cd ${distDirectory}
+        cd ${env.DIST_DIRECTORY}
         zip -r dist.zip ./*
     """
 
