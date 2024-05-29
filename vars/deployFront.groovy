@@ -10,8 +10,11 @@ def call(Map config) {
     }
 
     echo "Deploying dist directory: ${distDirectory}"
-    
-    sh "zip -r dist.zip ${distDirectory}"
+
+    sh """
+        cd ${distDirectory}
+        zip -r dist.zip .
+    """
 
     withCredentials([sshUserPrivateKey(credentialsId: 'private', keyFileVariable: 'SSH_KEY')]) {
          sh "scp -r -P 22 dist.zip Administrator@103.94.159.179:C:/test"
