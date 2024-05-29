@@ -26,10 +26,9 @@ sh """
          sh "scp -r -P 22 dist.zip Administrator@103.94.159.179:C:/test"
          sh "ssh -p 22 Administrator@103.94.159.179 \"powershell -Command Expand-Archive -Path 'C:\\\\test\\\\dist.zip' -DestinationPath 'C:\\\\test\\\\'\""
          sh """
-                ssh -p ${sshPort} ${sshUsername}@${sshHostname} \"powershell -Command \"
-                robocopy ${remoteDirectory}\\${distDirectory} C:\\Test2 /E
-                \"
+            ssh -p ${sshPort} ${sshUsername}@${sshHostname} \"scp -r ${remoteDirectory}/${distDirectory}/browser/* C:/Test2\"
             """
+
 
 
         
