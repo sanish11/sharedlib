@@ -13,7 +13,7 @@ def call(Map config) {
     echo "Deploying dist directory: ${distDirectory}"
 
 sh """
-        cd ${config.DIST_DIRECTORY}
+        cd ${distDirectory}
         zip -r dist.zip ./*
     """
 
